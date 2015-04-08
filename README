@@ -1,0 +1,46 @@
+This Directory contains the Library for Sokuiki-Sensor "URG".
+
+VERSION:
+
+libscip2awd Release 0.8, December 07, 2009
+libscip2awd Release 0.5, June 06, 2008
+
+SUPPORTED PLATFORMS:
+
+-  Linux
+-  Microsoft Windows
+    with MinGW/Cygwin
+         and pthreads_win32 (http://sources.redhat.com/pthreads-win32/)
+
+CONTAINED FILES:
+
+ libscip2awd.h
+ libscip2awd_base.h
+ libscip2awd_base.c
+ libscip2awd_cmd.h
+ libscip2awd_cmd.c
+ libscip2awd_dbuffer.h
+ libscip2awd_dbuffer.c
+ libscip2awd_test.c
+ Makefile
+ README
+
+BUILD:
+
+ make
+   Build the library.
+ make install
+   Install the library. ( Root permission may be needed. )
+ make test
+   Build sample program.
+ make clean
+   Remove compiled files without installed library.
+
+DOCUMENTATION:
+
+ Please compile documentation with Doxygen.
+
+BUG REPORTING:
+
+ Send bug reports by e-mail to <atusi_w@roboken.esys.tsukuba.ac.jp>.
+
