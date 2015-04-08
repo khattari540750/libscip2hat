@@ -1,7 +1,6 @@
 /build
 CMakeLists.txt.user
 
-
 *.log
 *~
 *.o
@@ -18,11 +17,10 @@ libtool
 .libs
 *.la
 *.lo
-sample/test-gs
-sample/test-ms
-sample/test-ms-callback
-sample/test-ssm/urg-handler
-sample/test-ssm/urg-viewer
+
+sample/test_gs
+sample/test_ms
+sample/test_ms-callback
 
 autom4te.cache/requests
 
