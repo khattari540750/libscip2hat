@@ -1,5 +1,5 @@
 # ------------------------------------------------------------
-#  libssm and ssm-coodinator CMake file for scip2hat
+#  libscip2hat CMake file for scip2hat
 #  
 #    auotmatically build
 #  ~/src directory
@@ -11,25 +11,16 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 
 # set ALL COMPLE OPTIONS 
-set(CMAKE_C_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS "-Wall")
+set(CMAKE_C_FLAGS "-Wall -O3 -Werror")
+set(CMAKE_CXX_FLAGS "-Wall -O3 -Werror")
 
 
-# generated libssm
-set(SSM_LIBS ${SSM_LIBS} ssm)
-#set(CMAKE_C_FLAGS "-Werror")
-#set(CMAKE_CXX_FLAGS "-Werror")
+# generated libscip2hat
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/src)
-add_library(ssm libssm-shm.c libssm-time.c libssm.c)
-target_link_libraries (ssm pthread)
+add_library(libscip2hat libscip2hat_base.c libscip2hat_cmd.c libscip2hat_dbuffer.c)
+target_link_libraries (libscip2hat)
 
 
-# generated ssm-coodinator
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/src)
-add_executable(ssm-coordinator ssm-coordinator.cpp)
-target_link_libraries(ssm-coordinator ${SSM_LIBS})
-
-
-# install lib and executable
+# install library
 #install(TARGETS MathFunctions DESTINATION bin)
 #install(FILES MathFunctions.h DESTINATION include)

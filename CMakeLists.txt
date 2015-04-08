@@ -27,6 +27,4 @@ set(VERSION_NUMBER_MICRO 0)
 
 # add the sub directories
 add_subdirectory(src)
-#add_subdirectory(utilities)
-
-
+#add_subdirectory(sample)
