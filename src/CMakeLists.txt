@@ -22,4 +22,4 @@ target_link_libraries (scip2hat)
 
 
 # install library
-#install(TARGETS scip2hat DESTINATION lib)
+install(TARGETS scip2hat DESTINATION lib)
