@@ -2,8 +2,7 @@ This Directory contains the Library for Sokuiki-Sensor "URG".
 
 VERSION:
 
-libscip2awd Release 0.8, December 07, 2009
-libscip2awd Release 0.5, June 06, 2008
+libscip2hat Release 0.1, April 08, 2015
 
 SUPPORTED PLATFORMS:
 
@@ -14,27 +13,27 @@ SUPPORTED PLATFORMS:
 
 CONTAINED FILES:
 
- libscip2awd.h
- libscip2awd_base.h
- libscip2awd_base.c
- libscip2awd_cmd.h
- libscip2awd_cmd.c
- libscip2awd_dbuffer.h
- libscip2awd_dbuffer.c
- libscip2awd_test.c
+ libscip2hat.h
+ libscip2hat_base.h
+ libscip2hat_base.c
+ libscip2hat_cmd.h
+ libscip2hat_cmd.c
+ libscip2hat_dbuffer.h
+ libscip2hat_dbuffer.c
+ test files
  Makefile
  README
 
+
 BUILD:
 
- make
-   Build the library.
- make install
-   Install the library. ( Root permission may be needed. )
- make test
-   Build sample program.
- make clean
-   Remove compiled files without installed library.
+ this project use cmake
+
+ 1.cd build
+ 2.cmake ..
+ 3.make
+ 4.sudo make install
+
 
 DOCUMENTATION:
 
@@ -42,5 +41,5 @@ DOCUMENTATION:
 
 BUG REPORTING:
 
- Send bug reports by e-mail to <atusi_w@roboken.esys.tsukuba.ac.jp>.
+ Send bug reports by e-mail to <hattori@team-lab.com>.
 
