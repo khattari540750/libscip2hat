@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include <signal.h>
 
-#include "scip2awd.h"
+#include "scip2hat.h"
 
 /** Flag */
 int gShutoff;

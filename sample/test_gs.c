@@ -1,6 +1,6 @@
 
 /**
-  @file libscip2awd_test.c
+  @file libscip2hat_test.c
   @brief Test program for libscip2
   @author Atsushi WATANEBE <atusi_w@roboken.esys.tsukuba.ac.jp> <atusi_w@doramanjyu.com>
  */
@@ -10,7 +10,7 @@
 #include <sys/time.h>
 #include <signal.h>
 
-#include "scip2awd.h"
+#include "scip2hat.h"
 
 // #define USE_GS
 
