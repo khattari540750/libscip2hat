@@ -1,12 +1,12 @@
 
 /**
-  @file libscip2hat.h
-  @brief Library for Sokuiki-Sensor "URG"
-  @author Atsushi WATANABE <atusi_w[at]roboken.esys.tsukuba.ac.jp> 
+  @file   libscip2hat.h
+  @brief  Library for Sokuiki-Sensor "URG"
+  @author HATTORI Kohei <hattori[at]team-lab.com>
  */
 
-#ifndef __LIBSCIP2AWD_H__
-#define __LIBSCIP2AWD_H__
+#ifndef __LIBSCIP2HAT_H__
+#define __LIBSCIP2HAT_H__
 
 #ifdef __cplusplus
 extern "C"
@@ -21,4 +21,4 @@ extern "C"
 }
 #endif
 
-#endif											/* __LIBSCIP2AWD_H__ */
+#endif											/* __LIBSCIP2HAT_H__ */
