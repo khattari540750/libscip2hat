@@ -21,6 +21,15 @@ add_library(scip2hatStatic STATIC libscip2hat_base.c libscip2hat_cmd.c libscip2h
 install(TARGETS scip2hatStatic DESTINATION lib)
 
 
+# generated libscip2hat
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/src)
+add_library(scip2hatShared SHARED libscip2hat_base.c libscip2hat_cmd.c libscip2hat_dbuffer.c)
+install(TARGETS scip2hatShared DESTINATION lib)
+
+
+
+
+
 # target_link_libraries (scip2hat)
 
 
