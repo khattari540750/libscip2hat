@@ -20,7 +20,7 @@ libtool
 
 sample/test_gs
 sample/test_ms
-sample/test_ms-callback
+sample/test_ms_callback
 
 autom4te.cache/requests
 
