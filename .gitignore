@@ -18,9 +18,9 @@ libtool
 *.la
 *.lo
 
-sample/test_gs
-sample/test_ms
-sample/test_ms_callback
+/sample/test_gs
+/sample/test_ms
+/sample/test_ms_callback
 
 autom4te.cache/requests
 
