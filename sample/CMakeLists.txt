@@ -10,6 +10,7 @@
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/src)
 
+
 # set ALL COMPLE OPTIONS 
 set(CMAKE_C_FLAGS "-Wall -g")
 set(CMAKE_CXX_FLAGS "-Wall -g")
