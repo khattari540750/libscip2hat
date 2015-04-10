@@ -1,8 +1,8 @@
 # ------------------------------------------------------------
-#  libscip2hat CMake file for scip2hat
+#  libscip2hat include headers
 #  
-#    auotmatically install
-#  ~/include directory
+#  auotmatically install
+#  ~/include
 # ------------------------------------------------------------
 
 

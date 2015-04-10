@@ -11,7 +11,8 @@
 cmake_minimum_required(VERSION 2.4 FATAL_ERROR)
 project(scip2hat)
 
-## Project version number
+
+# Project version number
 set(VERSION_NUMBER_MAJOR 0)
 set(VERSION_NUMBER_MINOR 0)
 set(VERSION_NUMBER_MICRO 0)
