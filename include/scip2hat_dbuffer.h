@@ -1,9 +1,10 @@
-
+/****************************************************************/
 /**
-  @file libscip2hat_dbuffer.h
-  @brief Library for Sokuiki-Sensor "URG"
-  @author Atsushi WATANABE <atusi_w[at]roboken.esys.tsukuba.ac.jp> 
+  @file   libscip2hat_dbuffer.h
+  @brief  Library for Sokuiki-Sensor "URG"
+  @author HATTORI Kohei <hattori[at]team-lab.com>
  */
+/****************************************************************/
 
 #ifndef __LIBscip2hat_DBUFFER_H__
 #define __LIBscip2hat_DBUFFER_H__

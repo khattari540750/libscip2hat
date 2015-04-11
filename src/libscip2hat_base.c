@@ -1,9 +1,13 @@
-
+/****************************************************************/
 /**
   @file   libscip2hat.c
   @brief  Library for Sokuiki-Sensor "URG"
   @author HATTORI Kohei <hattori[at]team-lab.com>
+  @date   2015/04/11
  */
+/****************************************************************/
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,11 +28,16 @@
 #include "scip2hat_base.h"
 #include "scip2hat_cmd.h"
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Convert S2Bitrate_e to integer
   @param acBitrate Bitrate
   @return Integer Notation Bitrate
  */
+/*--------------------------------------------------------------*/
 int bitrate2i( const speed_t acBitrate )
 {
     if( acBitrate == B9600 )
@@ -56,65 +65,77 @@ int bitrate2i( const speed_t acBitrate )
     return 0;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Send Terminal Charactor
   @param *apPort Pointer to SCIP2.0 Device Port
   @return false: failed, true: succeeded
  */
+/*--------------------------------------------------------------*/
 int Scip2_SendTerm( S2Port * apPort )
 {
-    /* return value of fwrite */
+    //! return value of fwrite
     size_t ret;
 
     ret = fwrite( "\n", 1, sizeof ( char ), apPort );
     if( ret == 0 )
-    {
         return 0;
-    }
 
     return 1;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Recive Terminal Charactor
   @param *apPort Pointer to SCIP2.0 Device Port
   @return false: failed, true: succeeded
  */
+/*--------------------------------------------------------------*/
 int Scip2_RecvTerm( S2Port * apPort )
 {
-    /* return value of fget */
+    //! return value of fget
     void *ret;
-    /* Recive Buffer */
+    //! Recive Buffer
     char buf[SCIP2_MAX_LENGTH] = "\0";
 
     ret = fgets( buf, SCIP2_MAX_LENGTH, apPort );
-    if( ret == NULL || buf[0] != '\n' )
-    {
+    if( ret == NULL || buf[0] != '\n' ){
 #ifdef SCIP2_DEBUG
         fprintf( stderr, "SCIP2 ERROR: Failed to read terminal character.\n" );
         fflush( stderr );
         fflush( stderr );
-#endif											/* SCIP2_DEBUG */
+#endif				/* SCIP2_DEBUG */
         return 0;
     }
     return 1;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Recieve SCIP2.0 Status value
   @param *apPort Pointer to SCIP2.0 Device Port
   @return ERROR: -1, SUCCESS: Status Value
  */
+/*--------------------------------------------------------------*/
 int Scip2_RecvStatus( S2Port * apPort )
 {
-    /* return value of fgets */
+    //! return value of fgets
     void *ret2;
-    /* return value of function */
+    //! return value of function
     int s_ret;
-    /* Recive Buffer */
+    //! Recive Buffer
     char buf[SCIP2_MAX_LENGTH] = "\0";
 #ifdef SCIP2_ENABLE_CHECKSUM
-    /* Checksum */
+    //! Checksum
     char sum;
 #endif											/* SCIP2_ENABLE_CHECKSUM */
 
@@ -174,23 +195,28 @@ int Scip2_RecvStatus( S2Port * apPort )
     return s_ret;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Send SCIP2.0 Message
   @param *apPort Pointer to SCIP2.0 Device Port
   @param *apcMes Pointer to SCIP2.0 Message( without LF terminater )
   @return error: -1, otherwise: return value of device
  */
+/*--------------------------------------------------------------*/
 int Scip2_Send( S2Port * apPort, const char *apcMes )
 {
-    /* return value of fwrite */
+    //! return value of fwrite
     size_t ret;
-    /* return value of fgets */
+    //! return value of fgets
     void *ret2;
-    /* return value of function */
+    //! return value of function
     int s_ret;
-    /* Recive Buffer */
+    //! Recive Buffer
     char buf[SCIP2_MAX_LENGTH] = "\0";
-    /* Strtok save ptr */
+    //! Strtok save ptr
     char *ptr;
 
 #ifdef SCIP2_DEBUG_ALL
@@ -248,7 +274,11 @@ int Scip2_Send( S2Port * apPort, const char *apcMes )
 char scip2_debuf[SCIP2_MAX_LENGTH];
 #endif
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Recive encoded data
   @param *apPort Pointer to SCIP2.0 Device Port
   @param *apBuf Pointer to Buffer
@@ -258,22 +288,23 @@ char scip2_debuf[SCIP2_MAX_LENGTH];
   @param *apNRemains Number of remaining bytes
   @return failed: -1, succeeded: size of recived data
  */
+/*--------------------------------------------------------------*/
 int
 Scip2_RecvEncodedLine( S2Port * apPort, unsigned long *apBuf, int aNBuf,
                        const S2EncType acEnc, unsigned long *apRemains, int *apNRemains )
 {
-    /* Scanning Pointer */
+    //! Scanning Pointer
     char *pos;
-    /* Recive Buffer */
+    //! Recive Buffer
     char buf[SCIP2_MAX_LENGTH];
-    /* General */
+    //! General
     int i, j;
-    /* Decoded data */
+    //! Decoded data
     unsigned long value;
-    /* Decode mask */
+    //! Decode mask
     unsigned long mask;
 #ifdef SCIP2_ENABLE_CHECKSUM
-    /* Check sum */
+    //! Check sum
     unsigned int sum = 0;
 #endif											/* SCIP2_ENABLE_CHECKSUM */
 
@@ -334,19 +365,24 @@ Scip2_RecvEncodedLine( S2Port * apPort, unsigned long *apBuf, int aNBuf,
     return j;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Flush buffer of port
   @param *apPort Pointer to SCIP2.0 Device Port
   @return failed: false, succeeded: true
  */
+/*--------------------------------------------------------------*/
 void Scip2_Flush( S2Port * apPort )
 {
-    /* File number of Port */
+    //! File number of Port
     int fn;
 
     fn = fileno( apPort );
 
-    /* Flash Input/Output Buffer */
+    //! Flash Input/Output Buffer
     tcflush( fn, TCIFLUSH );
     usleep( 5000 );
     Scip2_SendTerm( apPort );
@@ -355,19 +391,24 @@ void Scip2_Flush( S2Port * apPort )
     usleep( 5000 );
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Change Bitrate of Port
   @param *apPort Pointer to SCIP2.0 Device Port
   @param acBitrate Bitrate
   @return failed: false, succeeded: true
  */
+/*--------------------------------------------------------------*/
 int Scip2_ChangeBitrate( S2Port * apPort, const speed_t acBitrate )
 {
-    /* Parameter of terminal io */
+    //! Parameter of terminal io
     struct termios term;
-    /* Return value */
+    //! Return value
     int ret;
-    /* File number of Port */
+    //! File number of Port
     int fn;
 
     fn = fileno( apPort );
@@ -376,18 +417,18 @@ int Scip2_ChangeBitrate( S2Port * apPort, const speed_t acBitrate )
     cfsetospeed( &term, acBitrate );
     cfsetispeed( &term, acBitrate );
 
-    /* cfmakeraw( &term ); */
+    //! cfmakeraw( &term );
     term.c_iflag &= ~( IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON );
     term.c_oflag &= ~OPOST;
     term.c_lflag &= ~( ECHO | ECHONL | ICANON | ISIG | IEXTEN );
     term.c_cflag &= ~( CSIZE | PARENB );
     term.c_cflag |= CS8;
 
-    term.c_cflag &= ~CRTSCTS;					/* Don't control hardware flow */
-    term.c_cc[VTIME] = 6;						/* Set time out to 600 ms */
-    term.c_cc[VMIN] = 0;						/* Set minimum string length */
+    term.c_cflag &= ~CRTSCTS;					//! Don't control hardware flow
+    term.c_cc[VTIME] = 6;						//! Set time out to 600 ms
+    term.c_cc[VMIN] = 0;						//! Set minimum string length
 
-    /* Apply setting */
+    //! Apply setting
     ret = tcsetattr( fn, TCSANOW, &term );
     if( ret != 0 )
     {
@@ -398,17 +439,22 @@ int Scip2_ChangeBitrate( S2Port * apPort, const speed_t acBitrate )
         return 0;
     }
 
-    /* Flash Input/Output Buffer */
+    //! Flash Input/Output Buffer
     Scip2_Flush( apPort );
 
     return 1;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Close SCIP2.0 Device Port
   @param *apPort Pointer to SCIP2.0 Device Port
   @return failed: false, succeeded: true
  */
+/*--------------------------------------------------------------*/
 int Scip2_Close( S2Port * apPort )
 {
     Scip2CMD_RS( apPort );
@@ -419,17 +465,22 @@ int Scip2_Close( S2Port * apPort )
     return 0;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Open SCIP2.0 Device Port
   @param acpDevice Pointer to Name of SCIP2.0 Device
   @param acBitrate Bitrate
   @return failed: NULL, succeeded: Pointer to Device Handle
  */
+/*--------------------------------------------------------------*/
 S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
 {
-    /* Handle to the Device */
+    //! Handle to the Device
     FILE *this;
-    /* Bitrate List ( order in which tried ) */
+    //! Bitrate List ( order in which tried )
     speed_t rates[] = {
         B19200,
         B115200,
@@ -448,11 +499,11 @@ S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
         B19200,
         B0
     };
-    /* Bitrate */
+    //! Bitrate
     speed_t *rate;
-    /* Return value of function */
+    //! Return value of function
     int ret;
-    /* Loop valiant */
+    //! Loop valiant
     int i;
 
     for ( i = 0; i < 2; i++ )
@@ -502,7 +553,7 @@ S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
                 Scip2_Flush( this );
                 break;
             }
-            /* Try SCIP2.0 command */
+            //! Try SCIP2.0 command
             ret = Scip2CMD_SCIP2( this );
             if( ret == -1 )
             {
@@ -547,21 +598,25 @@ S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
     return this;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
   @brief Open SCIP2.0 Device Port on Ethernet
   @param acpAddress Pointer to Name ( IP_address ) of SCIP2.0 Device
   @param acPort Number of Port
   @return failed: NULL, succeeded: Pointer to Device Handle
  */
+/*--------------------------------------------------------------*/
 S2Port *Scip2_OpenEthernet( const char *acpAddress, const int acPort )
 {
-    /* Handle to the Device */
+    //! Handle to the Device
     FILE *self;
-    /* fd */
+    //! fd
     int fd;
-    /* IP address */
+    //! IP address
     struct sockaddr_in address;
-    /* Loop valiant */
+    //! Loop valiant
     int i;
 
     for ( i = 0; i < 1; i++ )

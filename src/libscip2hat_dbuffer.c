@@ -1,9 +1,12 @@
-
+/****************************************************************/
 /**
   @file   libscip2hat_dbuffer.c
   @brief  Library for Sokuiki-Sensor "URG"
   @author HATTORI Kohei <hattori[at]team-lab.com>
  */
+/****************************************************************/
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,10 +15,15 @@
 
 #include "scip2hat.h"
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Initialize dual buffer structure
   @param *aData Pointer to dual buffer structure
  */
+/*--------------------------------------------------------------*/
 void S2Sdd_Init( S2Sdd_t * aData )
 {
     aData->thread = 0;
@@ -47,10 +55,15 @@ void S2Sdd_Init( S2Sdd_t * aData )
     aData->userdata = NULL;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Destruct dual buffer structure
   @param *aData Pointer to dual buffer structure
  */
+/*--------------------------------------------------------------*/
 void S2Sdd_Dest( S2Sdd_t * aData )
 {
     S2Sdd_StopThread( aData );
@@ -73,7 +86,11 @@ void S2Sdd_Dest( S2Sdd_t * aData )
     pthread_mutex_destroy( &( aData->mutexw ) );
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Set callback function for analyze scan data
   @param *aData Pointer to dual buffer structure
   @param *aCallback Pointer to callback function.
@@ -81,6 +98,7 @@ void S2Sdd_Dest( S2Sdd_t * aData )
          If callback function returns value 0, dual buffer thread will stop.
   @param *aUserdata Pointer of argument for callback function
  */
+/*--------------------------------------------------------------*/
 void S2Sdd_setCallback( S2Sdd_t * aData, int ( *aCallback ) ( S2Scan_t *, void * ), void *aUserdata )
 {
     pthread_mutex_lock( &( aData->mutexw ) );
@@ -89,11 +107,16 @@ void S2Sdd_setCallback( S2Sdd_t * aData, int ( *aCallback ) ( S2Scan_t *, void *
     pthread_mutex_unlock( &( aData->mutexw ) );
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief check data is error
   @retval 1 error
   @retvak 0 normal
  */
+/*--------------------------------------------------------------*/
 int S2Sdd_IsError( S2Sdd_t * aData )
 {
     pthread_mutex_lock( &( aData->mutexw ) );
@@ -106,12 +129,17 @@ int S2Sdd_IsError( S2Sdd_t * aData )
     return 0;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Start using Data ( Non-Blocking )
   @param *aData Pointer to dual buffer structure
   @param **aScan Pointer to buffer structure handle
   @return failed: NULL, fatal error: -1, succeeded: Pointer to front buffer
  */
+/*--------------------------------------------------------------*/
 int S2Sdd_Begin( S2Sdd_t * aData, S2Scan_t ** aScan )
 {
     if( pthread_mutex_trylock( &( aData->mutexr ) ) != 0 )
@@ -151,19 +179,29 @@ int S2Sdd_Begin( S2Sdd_t * aData, S2Scan_t ** aScan )
     return 0;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief End using Data
   @param *aData Pointer to dual buffer structure
  */
+/*--------------------------------------------------------------*/
 void S2Sdd_End( S2Sdd_t * aData )
 {
     pthread_mutex_unlock( &( aData->mutexr ) );
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Stop thread which reads data of MS/GS command
   @param *aData Pointer to buffer structure
  */
+/*--------------------------------------------------------------*/
 void S2Sdd_StopThread( S2Sdd_t * aData )
 {
     if( aData->thread )
@@ -176,25 +214,30 @@ void S2Sdd_StopThread( S2Sdd_t * aData )
     }
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Get Scanned data
   @param *aArg Pointer to dual buffer structure
  */
+/*--------------------------------------------------------------*/
 void *S2Sdd_RecvData( void *aArg )
 {
-    /* Pointer to dual buffer structure */
+    //! Pointer to dual buffer structure
     S2Sdd_t *data;
-    /* Pointer to front buffer */
+    //! Pointer to front buffer
     S2Scan_t *scan;
-    /* Pointer to Buffer */
+    //! Pointer to Buffer
     unsigned long *pos;
-    /* Returned value */
+    //! Returned value
     int ret;
-    /* Send & Recive Buffer */
+    //! Send & Recive Buffer
     char buf[SCIP2_MAX_LENGTH];
-    /* Remains value of line */
+    //! Remains value of line
     unsigned long value;
-    /* Number of remains value of line */
+    //! Number of remains value of line
     int nrem;
 
     pthread_setcanceltype( PTHREAD_CANCEL_DEFERRED, NULL );
@@ -244,7 +287,7 @@ void *S2Sdd_RecvData( void *aArg )
 
     value = 0;
     nrem = 0;
-    /* Start reading */
+    //! Start reading
     ret = Scip2_RecvEncodedLine( scan->port, &scan->time, 1, SCIP2_ENC_4BYTE, &value, &nrem );
     if( ret != 1 )
     {
@@ -309,7 +352,7 @@ void *S2Sdd_RecvData( void *aArg )
 
     pthread_mutex_unlock( &( scan->mutex ) );
 
-    /* run callback function */
+    //! run callback function
     if( data->callback )
     {
         pthread_mutex_lock( &( scan->mutex ) );
@@ -317,7 +360,7 @@ void *S2Sdd_RecvData( void *aArg )
         pthread_mutex_unlock( &( scan->mutex ) );
     }
 
-    /* swap buffer */
+    //! swap buffer
     pthread_mutex_lock( &( data->mutexw ) );
     data->sec = data->pri;
     data->pri = scan;
@@ -330,6 +373,8 @@ void *S2Sdd_RecvData( void *aArg )
     return 0;
 }
 
+
+
 #if defined(SCIP2_DEBUG_ALL) || defined(SCIP2_OUTPUT_CONTDATA)
 char errbuf[2][8192];
 int nerrbuf;
@@ -337,39 +382,44 @@ char *perrbuf;
 char *perrbuf2;
 #endif											/* SCIP2_DEBUG_ALL */
 
+
+
+/*--------------------------------------------------------------*/
 /**
+  @fn
   @brief Recive scanned data continually
   @param *aArg Pointer to dual buffer structure
  */
+/*--------------------------------------------------------------*/
 void *S2Sdd_RecvDataCont( void *aArg )
 {
-    /* Pointer to dual buffer structure */
+    //! Pointer to dual buffer structure
     S2Sdd_t *data;
-    /* Pointer to front buffer */
+    //! Pointer to front buffer
     S2Scan_t *scan;
-    /* Pointer to Buffer */
+    //! Pointer to Buffer
     unsigned long *pos;
-    /* Returned value */
+    //! Returned value
     void *ret;
-    /* Send & Recive Buffer */
+    //! Send & Recive Buffer
     char buf[SCIP2_MAX_LENGTH];
-    /* Command */
+    //! Command
     char mes[SCIP2_MAX_LENGTH];
-    /* Strtok save ptr */
+    //! Strtok save ptr
     char *ptr;
-    /* Remaining scan number */
+    //! Remaining scan number
     char rem[3];
-    /* Remaining scan number */
+    //! Remaining scan number
     int remnum;
-    /* Remains value of line */
+    //! Remains value of line
     unsigned long value;
-    /* Number of remains value of line */
+    //! Number of remains value of line
     int nrem;
-    /* Number of data in 1 step */
+    //! Number of data in 1 step
     int multi;
-    /* Returned status number */
+    //! Returned status number
     int status;
-    /* Number of encoded/decoded lines */
+    //! Number of encoded/decoded lines
     int nlines;
 
     int enc;
@@ -595,7 +645,7 @@ void *S2Sdd_RecvDataCont( void *aArg )
 
         value = 0;
         nrem = 0;
-        /* Start reading */
+        //! Start reading
         nlines = Scip2_RecvEncodedLine( scan->port, &scan->time, 1, SCIP2_ENC_4BYTE, &value, &nrem );
 #ifdef SCIP2_OUTPUT_CONTDATA
         memcpy( perrbuf, scip2_debuf, strlen( scip2_debuf ) );
@@ -685,7 +735,7 @@ void *S2Sdd_RecvDataCont( void *aArg )
 #endif											/* SCIP2_DEBUG_ALL */
         pthread_mutex_unlock( &( scan->mutex ) );
 
-        /* run callback function */
+        //! run callback function
         if( data->callback )
         {
             int ret;
@@ -696,7 +746,7 @@ void *S2Sdd_RecvDataCont( void *aArg )
                 break;
         }
 
-        /* swap buffer */
+        //! swap buffer
         pthread_mutex_lock( &( data->mutexw ) );
         data->thr = data->sec;
         data->sec = scan;
@@ -706,7 +756,7 @@ void *S2Sdd_RecvDataCont( void *aArg )
 
         pthread_testcancel(  );
 
-        /* Stop if remain number is 0 */
+        //! Stop if remain number is 0
         if( remnum == 0 && scan->num != 0 )
         {
             break;

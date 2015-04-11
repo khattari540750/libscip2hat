@@ -1,9 +1,10 @@
-
+/****************************************************************/
 /**
-  @file libscip2hat_cmd.h
+  @file   libscip2hat_cmd.h
   @brief  Library for Sokuiki-Sensor "URG"
   @author HATTORI Kohei <hattori[at]team-lab.com>
  */
+/****************************************************************/
 
 #ifndef __LIBSCIP2HAT_CMD_H__
 #define __LIBSCIP2HAT_CMD_H__

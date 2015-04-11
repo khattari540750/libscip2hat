@@ -1,9 +1,10 @@
-
+/****************************************************************/
 /**
-  @file   libscip2hat.h
+  @file   libscip2hat_base.h
   @brief  Library for Sokuiki-Sensor "URG"
   @author HATTORI Kohei <hattori[at]team-lab.com>
  */
+/****************************************************************/
 
 #ifndef __LIBSCIP2HAT_BASE_H__
 #define __LIBSCIP2HAT_BASE_H__
@@ -13,12 +14,16 @@ extern "C"
 {
 #endif
 
+
+
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
 #include <pthread.h>
 
 #include "scip2hat.h"
+
+
 
 /** SCIP2 encode type */
 typedef enum SCIP2_ENCODE_TYPE_E
