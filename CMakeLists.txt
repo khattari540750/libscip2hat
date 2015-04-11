@@ -26,6 +26,10 @@ set(VERSION_NUMBER_MICRO 0)
 #)
 
 
+# find packages
+find_package(Threads)
+
+
 # add the sub directories
 add_subdirectory(src)
 add_subdirectory(include)

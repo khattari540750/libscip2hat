@@ -1,6 +1,8 @@
 /build
 *.a
 *.dylib
+config.h
+config.h.in
 sample/test_gs
 sample/test_ms
 sample/test_ms_callback
@@ -16,11 +18,8 @@ a.out
 Makefile
 .deps
 config.status
-config.h
-config.h.in
 stamp-h1
 libtool
 .libs
 *.la
 *.lo
-autom4te.cache/requests
