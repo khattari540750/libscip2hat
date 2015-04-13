@@ -1,4 +1,4 @@
-# ------------------------------------------------------------
+l# ------------------------------------------------------------
 #  libscip2hat include headers
 #  
 #  auotmatically install
@@ -7,4 +7,4 @@
 
 
 # install library
-install(FILES scip2hat.h DESTINATION include)
+install(FILES scip2hat.h scip2hat_base.h scip2hat_cmd.h scip2hat_dbuffer.h DESTINATION include)
