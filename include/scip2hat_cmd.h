@@ -14,6 +14,8 @@ extern "C"
 {
 #endif
 
+
+
 #include <termios.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -21,6 +23,8 @@ extern "C"
 
 #include "scip2hat.h"
 #include "scip2hat_dbuffer.h"
+
+
 
 /** Structure of VV command */
 typedef struct SCIP2_SENSOR_VERSION
@@ -31,6 +35,8 @@ typedef struct SCIP2_SENSOR_VERSION
     char protocol[SCIP2_MAX_LENGTH];
     char serialno[SCIP2_MAX_LENGTH];
 } S2Ver_t;
+
+
 
 /** Structure of PP command */
 typedef struct SCIP2_SENSOR_PARAM
@@ -44,6 +50,8 @@ typedef struct SCIP2_SENSOR_PARAM
     int step_front;
     int revolution;
 } S2Param_t;
+
+
 
 int Scip2CMD_SCIP2( S2Port * apPort );
 int Scip2CMD_SS( S2Port * apPort, const speed_t acBitrate );
@@ -64,11 +72,15 @@ int aCull, int aNum, S2Sdd_t * aData, const S2EncType acEnc );
 int Scip2CMD_VV( S2Port * apPort, S2Ver_t * apVer );
 int Scip2CMD_PP( S2Port * apPort, S2Param_t * apParam );
 
+
+
 /** alternative of Scip2CMD_TM for compatibility */
 #define Scip2CMD_TM Scip2CMD_TM_GetStartTime
+
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif											/* __LIBSCIP2HAT_CMD_H__ */
+#endif	/* __LIBSCIP2HAT_CMD_H__ */

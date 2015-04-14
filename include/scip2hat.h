@@ -14,12 +14,16 @@ extern "C"
 {
 #endif
 
+
+
 #include "scip2hat_base.h"
 #include "scip2hat_cmd.h"
 #include "scip2hat_dbuffer.h"
+
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif											/* __LIBSCIP2HAT_H__ */
+#endif	/* __LIBSCIP2HAT_H__ */

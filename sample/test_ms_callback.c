@@ -1,9 +1,12 @@
-
+/****************************************************************/
 /**
-  @file test-ms-callback.c
-  @brief  Library for Sokuiki-Sensor "URG"
-  @author HATTORI Kohei <hattori[at]team-lab.com>
+ * @file test-ms-callback.c
+ * @brief  Library for Sokuiki-Sensor "URG"
+ * @author HATTORI Kohei <hattori[at]team-lab.com>
  */
+/****************************************************************/
+
+
 
 #include <stdio.h>
 #include <unistd.h>
@@ -12,40 +15,50 @@
 
 #include "scip2hat.h"
 
-/** Flag */
+
+
+//! Flag
 int gShutoff;
 
+
+
+/*--------------------------------------------------------------*/
 /**
-  @brief Ctrl+C trap
-  @param aN not used
+ * @brief ctrlc
+ * @param aN not used
  */
+/*--------------------------------------------------------------*/
 void ctrlc( int aN )
 {
-    /* It is recommended to stop URG outputting data. */
-    /* or cost much time to start communication next time. */
+    //! It is recommended to stop URG outputting data.
+    //! or cost much time to start communication next time.
     gShutoff = 1;
     signal( SIGINT, NULL );
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
-  @brief callback function
-  @param *aScan Scan data
-  @param *aData User's data
-  @retval 1 success to analyze scan data.
-  @retval 0 failed to analyze scan data and stop thread of duall buffer.
+ * @brief  callback
+ * @param  aScan
+ * @param  aUser
+ * @retval 1:success to analyze scan data.
+ * @retval 0:failed to analyze scan data
+ *             and stop thread of duall buffer.
  */
+/*--------------------------------------------------------------*/
 int callback( S2Scan_t * aScan, void *aUser )
 {
-    /* Loop valiant */
-    int j;
-    /* Local time */
-    struct timeval tm;
-    gettimeofday( &tm, NULL );
-    /* then you can analyze data in parallel with reciving next data */
+    int j; //! Loop valiant
+    struct timeval tm; //! Local time
 
-    /* ---- analyze data ---- */
-    for ( j = 0; j < aScan->size; j++ )
-    {
+    gettimeofday( &tm, NULL );
+    //! then you can analyze data in parallel
+    //! with reciving next data
+
+    //! analyze data
+    for ( j = 0; j < aScan->size; j++ ){
         // printf( "%d, ", (int)aScan->data[j] );
     }
     gettimeofday( &tm, NULL );
@@ -55,71 +68,70 @@ int callback( S2Scan_t * aScan, void *aUser )
     return 1;
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
   @brief Main function
   @param aArgc Number of Arguments
   @param appArgv Arguments
   @return failed: 0, succeeded: 1
  */
+/*--------------------------------------------------------------*/
 int main( int aArgc, char **appArgv )
 {
-    /* Device Port */
-    S2Port *port;
-    /* Data recive dual buffer */
-    S2Sdd_t buf;
-    /* Returned value */
-    int ret;
+    S2Port *port; //! Device Port
+    S2Sdd_t buf;  //! Data recive dual buffer
+    int ret;      //! Returned value
 
-    if( aArgc != 2 )
-    {
+    if( aArgc != 2 ){
         fprintf( stderr, "USAGE: %s device\n", appArgv[0] );
         return 0;
     }
-    /* Start trapping ctrl+c signal */
+
+    //! Start trapping ctrl+c signal
     gShutoff = 0;
     signal( SIGINT, ctrlc );
 
-    /* Open the port */
+    //! Open the port
     port = Scip2_Open( appArgv[1], B115200 );
-    if( port == 0 )
-    {
+    if( port == 0 ){
         fprintf( stderr, "ERROR: Failed to open device.\n" );
         return 0;
     }
     printf( "Port opened\n" );
 
-    /* Initialize buffer before getting scanned data */
+    //! Initialize buffer before getting scanned data
     S2Sdd_Init( &buf );
     printf( "Buffer initialized\n" );
 
-    /* Set callback function to analyze scan data */
+    //! Set callback function to analyze scan data
     S2Sdd_setCallback( &buf, callback, NULL );
 
-    /* Demand sending me scanned data */
-    /* Data will be recived in another thread */
-    /* MS command */
+    //! Demand sending me scanned data
+    //! Data will be recived in another thread
+    //! MS command
     Scip2CMD_StartMS( port, 44, 725, 1, 0, 0, &buf, SCIP2_ENC_2BYTE );
 
-    /* wait for singnal SIGINT */
+    //! wait for singnal SIGINT
     printf( "input 'Ctrl-C' for exit.\n" );
     pause(  );
 
     printf( "\nStopping\n" );
 
     ret = Scip2CMD_StopMS( port, &buf );
-    if( ret == 0 )
-    {
+    if( ret == 0 ){
         fprintf( stderr, "ERROR: StopMS failed.\n" );
         return 0;
     }
 
     printf( "Stopped\n" );
 
-    /* Destruct buffer */
+    //! Destruct buffer
     S2Sdd_Dest( &buf );
     printf( "Buffer destructed\n" );
 
-    /* Close port */
+    //! Close port
     Scip2_Close( port );
     printf( "Port closed\n" );
 
