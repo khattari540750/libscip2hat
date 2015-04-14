@@ -1,15 +1,10 @@
 libscip2hat
 ============
-北陽製レーザー測域センサ"URG"を利用するためのライブラリ
+北陽製レーザー測域センサ " URG " を利用するためのライブラリ
 
 
-VERSION & UPDATE
------------------
-libscip2hat Release 0.1, April 08, 2015
-
-
-SUPPORTED PLATFORMS
---------------------
+動作環境
+--------
 -  OSX
 -  Linux
 -  Microsoft Windows
@@ -17,17 +12,21 @@ SUPPORTED PLATFORMS
          and pthreads_win32 (http://sources.redhat.com/pthreads-win32/)
 
 
-BUILD
------
- this project use cmake
+ビルド・インストール方法
+----------------------
+ このプロジェクトは、以下の手順にて、cmake を利用してビルド・インストールします。あらかじめ cmake をインストールしておいてください。
 
- 1.cd build
- 2.cmake ..
- 3.make
- 4.sudo make install
+ 1. mkdir build
+ 1. cd build
+ 2. cmake ..
+ 3. make
+ 4. sudo make install
 
 
+ライブラリの使用方法
+------------------
 
-LICENCE
+
+ライセンス
 ---------
 Coyright &copy; 2015 HATTORI Kohei
