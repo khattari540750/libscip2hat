@@ -32,16 +32,11 @@ libscip2hat
 
 1. まず、URGをPCに接続し、電源を入れます。
 2. 先ほどダウンロードしたパッケージのディレクトリから、サンプルの保存されているディレクトリへ移動します。
-   '$ cd libscip2hat/sample'
+   `$ cd libscip2hat/sample`
 3. サンプルプログラムを実行します。
-   '$./test-ms /dev/cu.usbmodem'
+   `$./test-ms /dev/cu.usbmodem`
    終了する際は、
-   'control + c'
+   `control + c`
 ボタンを押すことで停止できます。
 このとき、/dev/cu.usbmodem とは、URGが接続されているポート情報ファイルを示しており、環境によってその文字列は変化します。
 URGをポートから抜き差しした際、/dev/内で現れたり消えたりするものが対応したポート情報ファイルなので、それを引数として与えます。
-
-
-ライセンス
----------
-Coyright &copy; 2015 HATTORI Kohei
