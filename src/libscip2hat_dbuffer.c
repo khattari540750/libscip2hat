@@ -19,9 +19,8 @@
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Initialize dual buffer structure
-  @param *aData Pointer to dual buffer structure
+ * @brief Initialize dual buffer structure
+ * @param *aData Pointer to dual buffer structure
  */
 /*--------------------------------------------------------------*/
 void S2Sdd_Init( S2Sdd_t * aData )
@@ -59,9 +58,8 @@ void S2Sdd_Init( S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Destruct dual buffer structure
-  @param *aData Pointer to dual buffer structure
+ * @brief Destruct dual buffer structure
+ * @param *aData Pointer to dual buffer structure
  */
 /*--------------------------------------------------------------*/
 void S2Sdd_Dest( S2Sdd_t * aData )
@@ -90,13 +88,12 @@ void S2Sdd_Dest( S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Set callback function for analyze scan data
-  @param *aData Pointer to dual buffer structure
-  @param *aCallback Pointer to callback function.
-         This callback function return value 1 at success, and retrun value 0 at fail.
-         If callback function returns value 0, dual buffer thread will stop.
-  @param *aUserdata Pointer of argument for callback function
+ * @brief Set callback function for analyze scan data
+ * @param *aData Pointer to dual buffer structure
+ * @param *aCallback Pointer to callback function.
+ *        This callback function return value 1 at success, and retrun value 0 at fail.
+ *        If callback function returns value 0, dual buffer thread will stop.
+ * @param *aUserdata Pointer of argument for callback function
  */
 /*--------------------------------------------------------------*/
 void S2Sdd_setCallback( S2Sdd_t * aData, int ( *aCallback ) ( S2Scan_t *, void * ), void *aUserdata )
@@ -111,10 +108,9 @@ void S2Sdd_setCallback( S2Sdd_t * aData, int ( *aCallback ) ( S2Scan_t *, void *
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief check data is error
-  @retval 1 error
-  @retvak 0 normal
+ * @brief check data is error
+ * @retval 1 error
+ * @retval 0 normal
  */
 /*--------------------------------------------------------------*/
 int S2Sdd_IsError( S2Sdd_t * aData )
@@ -133,11 +129,10 @@ int S2Sdd_IsError( S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Start using Data ( Non-Blocking )
-  @param *aData Pointer to dual buffer structure
-  @param **aScan Pointer to buffer structure handle
-  @return failed: NULL, fatal error: -1, succeeded: Pointer to front buffer
+ * @brief Start using Data ( Non-Blocking )
+ * @param *aData Pointer to dual buffer structure
+ * @param **aScan Pointer to buffer structure handle
+ * @return failed: NULL, fatal error: -1, succeeded: Pointer to front buffer
  */
 /*--------------------------------------------------------------*/
 int S2Sdd_Begin( S2Sdd_t * aData, S2Scan_t ** aScan )
@@ -183,9 +178,8 @@ int S2Sdd_Begin( S2Sdd_t * aData, S2Scan_t ** aScan )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief End using Data
-  @param *aData Pointer to dual buffer structure
+ * @brief End using Data
+ * @param *aData Pointer to dual buffer structure
  */
 /*--------------------------------------------------------------*/
 void S2Sdd_End( S2Sdd_t * aData )
@@ -197,9 +191,8 @@ void S2Sdd_End( S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Stop thread which reads data of MS/GS command
-  @param *aData Pointer to buffer structure
+ * @brief Stop thread which reads data of MS/GS command
+ * @param *aData Pointer to buffer structure
  */
 /*--------------------------------------------------------------*/
 void S2Sdd_StopThread( S2Sdd_t * aData )
@@ -218,9 +211,8 @@ void S2Sdd_StopThread( S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Get Scanned data
-  @param *aArg Pointer to dual buffer structure
+ * @brief Get Scanned data
+ * @param *aArg Pointer to dual buffer structure
  */
 /*--------------------------------------------------------------*/
 void *S2Sdd_RecvData( void *aArg )
@@ -380,15 +372,14 @@ char errbuf[2][8192];
 int nerrbuf;
 char *perrbuf;
 char *perrbuf2;
-#endif											/* SCIP2_DEBUG_ALL */
+#endif										/* SCIP2_DEBUG_ALL */
 
 
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Recive scanned data continually
-  @param *aArg Pointer to dual buffer structure
+ * @brief Recive scanned data continually
+ * @param *aArg Pointer to dual buffer structure
  */
 /*--------------------------------------------------------------*/
 void *S2Sdd_RecvDataCont( void *aArg )

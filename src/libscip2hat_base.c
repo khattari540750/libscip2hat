@@ -3,7 +3,6 @@
   @file   libscip2hat.c
   @brief  Library for Sokuiki-Sensor "URG"
   @author HATTORI Kohei <hattori[at]team-lab.com>
-  @date   2015/04/11
  */
 /****************************************************************/
 
@@ -32,10 +31,9 @@
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Convert S2Bitrate_e to integer
-  @param acBitrate Bitrate
-  @return Integer Notation Bitrate
+ * @brief Convert S2Bitrate_e to integer
+ * @param acBitrate Bitrate
+ * @return Integer Notation Bitrate
  */
 /*--------------------------------------------------------------*/
 int bitrate2i( const speed_t acBitrate )
@@ -69,10 +67,9 @@ int bitrate2i( const speed_t acBitrate )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Send Terminal Charactor
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return false: failed, true: succeeded
+ * @brief Send Terminal Charactor
+ * @param apPort Pointer to SCIP2.0 Device Port
+ * @return false: failed 0, true: succeeded 1
  */
 /*--------------------------------------------------------------*/
 int Scip2_SendTerm( S2Port * apPort )
@@ -91,10 +88,9 @@ int Scip2_SendTerm( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Recive Terminal Charactor
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return false: failed, true: succeeded
+ * @brief Recive Terminal Charactor
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return false: failed 0, true: succeeded 1
  */
 /*--------------------------------------------------------------*/
 int Scip2_RecvTerm( S2Port * apPort )
@@ -120,10 +116,9 @@ int Scip2_RecvTerm( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Recieve SCIP2.0 Status value
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return ERROR: -1, SUCCESS: Status Value
+ * @brief Recieve SCIP2.0 Status value
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return ERROR: -1, SUCCESS: Status Value
  */
 /*--------------------------------------------------------------*/
 int Scip2_RecvStatus( S2Port * apPort )
@@ -199,11 +194,10 @@ int Scip2_RecvStatus( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Send SCIP2.0 Message
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *apcMes Pointer to SCIP2.0 Message( without LF terminater )
-  @return error: -1, otherwise: return value of device
+ * @brief Send SCIP2.0 Message
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *apcMes Pointer to SCIP2.0 Message( without LF terminater )
+ * @return error: -1, otherwise: return value of device
  */
 /*--------------------------------------------------------------*/
 int Scip2_Send( S2Port * apPort, const char *apcMes )
@@ -278,15 +272,14 @@ char scip2_debuf[SCIP2_MAX_LENGTH];
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Recive encoded data
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *apBuf Pointer to Buffer
-  @param *aNBuf Size of Buffer
-  @param acEnc Encode type
-  @param *apRemains Remaining value
-  @param *apNRemains Number of remaining bytes
-  @return failed: -1, succeeded: size of recived data
+ * @brief Recive encoded data
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *apBuf Pointer to Buffer
+ * @param *aNBuf Size of Buffer
+ * @param acEnc Encode type
+ * @param *apRemains Remaining value
+ * @param *apNRemains Number of remaining bytes
+ * @return failed: -1, succeeded: size of recived data
  */
 /*--------------------------------------------------------------*/
 int
@@ -369,10 +362,9 @@ Scip2_RecvEncodedLine( S2Port * apPort, unsigned long *apBuf, int aNBuf,
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Flush buffer of port
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return failed: false, succeeded: true
+ * @brief Flush buffer of port
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 void Scip2_Flush( S2Port * apPort )
@@ -395,11 +387,10 @@ void Scip2_Flush( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Change Bitrate of Port
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param acBitrate Bitrate
-  @return failed: false, succeeded: true
+ * @brief Change Bitrate of Port
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param acBitrate Bitrate
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2_ChangeBitrate( S2Port * apPort, const speed_t acBitrate )
@@ -449,10 +440,9 @@ int Scip2_ChangeBitrate( S2Port * apPort, const speed_t acBitrate )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Close SCIP2.0 Device Port
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return failed: false, succeeded: true
+ * @brief Close SCIP2.0 Device Port
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2_Close( S2Port * apPort )
@@ -469,11 +459,10 @@ int Scip2_Close( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Open SCIP2.0 Device Port
-  @param acpDevice Pointer to Name of SCIP2.0 Device
-  @param acBitrate Bitrate
-  @return failed: NULL, succeeded: Pointer to Device Handle
+ * @brief Open SCIP2.0 Device Port
+ * @param acpDevice Pointer to Name of SCIP2.0 Device
+ * @param acBitrate Bitrate
+ * @return failed: NULL, succeeded: Pointer to Device Handle
  */
 /*--------------------------------------------------------------*/
 S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
@@ -508,7 +497,6 @@ S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
 
     for ( i = 0; i < 2; i++ )
     {
-
         this = fopen( acpDevice, "w+" );
         if( this == NULL )
         {
@@ -602,10 +590,10 @@ S2Port *Scip2_Open( const char *acpDevice, const speed_t acBitrate )
 
 /*--------------------------------------------------------------*/
 /**
-  @brief Open SCIP2.0 Device Port on Ethernet
-  @param acpAddress Pointer to Name ( IP_address ) of SCIP2.0 Device
-  @param acPort Number of Port
-  @return failed: NULL, succeeded: Pointer to Device Handle
+ * @brief Open SCIP2.0 Device Port on Ethernet
+ * @param acpAddress Pointer to Name ( IP_address ) of SCIP2.0 Device
+ * @param acPort Number of Port
+ * @return failed: NULL, succeeded: Pointer to Device Handle
  */
 /*--------------------------------------------------------------*/
 S2Port *Scip2_OpenEthernet( const char *acpAddress, const int acPort )

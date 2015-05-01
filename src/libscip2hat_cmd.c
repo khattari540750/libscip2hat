@@ -20,10 +20,9 @@
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Switch to SCIP2.0 mode
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return false: failed, true: succeeded
+ * @brief Switch to SCIP2.0 mode
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return false: failed, true: succeeded
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_SCIP2( S2Port * apPort )
@@ -43,11 +42,10 @@ int Scip2CMD_SCIP2( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Change Device's Bitrate
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param acBitrate Bitrate
-  @return failed: false, succeeded: true
+ * @brief  Change Device's Bitrate
+ * @param  *apPort Pointer to SCIP2.0 Device Port
+ * @param  acBitrate Bitrate
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_SS( S2Port * apPort, const speed_t acBitrate )
@@ -74,10 +72,9 @@ int Scip2CMD_SS( S2Port * apPort, const speed_t acBitrate )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Laser ON
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return failed: false, succeeded: true
+ * @brief Laser ON
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_BM( S2Port * apPort )
@@ -110,10 +107,9 @@ int Scip2CMD_BM( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Laser OFF
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return failed: false, succeeded: true
+ * @brief  Laser OFF
+ * @param  *apPort Pointer to SCIP2.0 Device Port
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_QT( S2Port * apPort )
@@ -160,17 +156,16 @@ int Scip2CMD_QT( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Start getting scanned data
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param aStart Start step
-  @param aEnd End step
-  @param aGroup Number of group
-  @param *aData Pointer to buffer structure
-  @param acEnc Encode type
-  @return failed: false, succeeded: true
-  @attention Scip2CMD_StopGS must be called before calling another Scip2CMD function,
-             if the device remains sending data to PC!!
+ * @brief Start getting scanned data
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param aStart Start step
+ * @param aEnd End step
+ * @param aGroup Number of group
+ * @param *aData Pointer to buffer structure
+ * @param acEnc Encode type
+ * @return failed: false, succeeded: true
+ * @attention Scip2CMD_StopGS must be called before calling another Scip2CMD function,
+ *            if the device remains sending data to PC!!
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_GS( S2Port * apPort, int aStart, int aEnd, int aGroup, S2Sdd_t * aData, const S2EncType acEnc )
@@ -215,11 +210,10 @@ int Scip2CMD_GS( S2Port * apPort, int aStart, int aEnd, int aGroup, S2Sdd_t * aD
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Stop GS scanning
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *aData Pointer to buffer structure
-  @return failed: false, succeeded: true
+ * @brief Stop GS scanning
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *aData Pointer to buffer structure
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_StopGS( S2Port * apPort, S2Sdd_t * aData )
@@ -236,7 +230,6 @@ int Scip2CMD_StopGS( S2Port * apPort, S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
   @brief Start getting scanned data
   @param *apPort Pointer to SCIP2.0 Device Port
   @param aStart Start step
@@ -318,11 +311,10 @@ Scip2CMD_StartMS( S2Port * apPort, int aStart, int aEnd, int aGroup,
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Stop MS scanning
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *aData Pointer to buffer structure
-  @return failed: false, succeeded: true
+ * @brief Stop MS scanning
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *aData Pointer to buffer structure
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_StopMS( S2Port * apPort, S2Sdd_t * aData )
@@ -335,11 +327,10 @@ int Scip2CMD_StopMS( S2Port * apPort, S2Sdd_t * aData )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Get time of device
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *apTime Start time of device
-  @return failed: 0, succeeded: 1
+ * @brief Get time of device
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *apTime Start time of device
+ * @return failed: 0, succeeded: 1
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_TM_GetStartTime( S2Port * apPort, struct timeval *apTime )
@@ -395,12 +386,11 @@ int Scip2CMD_TM_GetStartTime( S2Port * apPort, struct timeval *apTime )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Get time of device
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *adClock device clock
-  @param *ahTime pc clock time
-  @return failed: 0, succeeded: 1
+ * @brief Get time of device
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *adClock device clock
+ * @param *ahTime pc clock time
+ * @return failed: 0, succeeded: 1
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_TM_GetSyncTime( S2Port * apPort, unsigned long *adClock, struct timeval *apTime )
@@ -473,18 +463,17 @@ int Scip2CMD_TM_GetSyncTime( S2Port * apPort, unsigned long *adClock, struct tim
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Set rotating speed
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param acDeboost Deboost rate
-  @return failed: 0, succeeded: time of device
+ * @brief Set rotating speed
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param acDeboost Deboost rate
+ * @return failed: 0, succeeded: time of device
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_CR( S2Port * apPort, const int acDeboost )
 {
-    /* Return value of function */
+    //! Return value of function
     int ret;
-    /* Send & Recive Buffer */
+    //! Send & Recive Buffer
     char buf[SCIP2_MAX_LENGTH];
 
     sprintf( buf, "CR%02d", acDeboost );
@@ -502,11 +491,10 @@ int Scip2CMD_CR( S2Port * apPort, const int acDeboost )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Get version info
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *apVer Pointer to version structure
-  @return failed: 0, succeeded: time of device
+ * @brief Get version info
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *apVer Pointer to version structure
+ * @return failed: 0, succeeded: time of device
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_VV( S2Port * apPort, S2Ver_t * apVer )
@@ -566,11 +554,10 @@ int Scip2CMD_VV( S2Port * apPort, S2Ver_t * apVer )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Get param info
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *apParam Pointer to param structure
-  @return failed: 0, succeeded: time of device
+ * @brief Get param info
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *apParam Pointer to param structure
+ * @return failed: 0, succeeded: time of device
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_PP( S2Port * apPort, S2Param_t * apParam )
@@ -642,10 +629,9 @@ int Scip2CMD_PP( S2Port * apPort, S2Param_t * apParam )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Reset Device
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @return failed: false, succeeded: true
+ * @brief Reset Device
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_RS( S2Port * apPort )
@@ -693,19 +679,18 @@ int Scip2CMD_RS( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Start getting scanned data
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param aStart Start step
-  @param aEnd End step
-  @param aGroup Number of group
-  @param aCull Culling clearance
-  @param aNum Number of scan
-  @param *aData Pointer to buffer structure
-  @param acEnc Encode type
-  @return failed: false, succeeded: true
-  @attention Scip2CMD_StopND must be called before calling another Scip2CMD function,
-             if the device remains sending data to PC!!
+ * @brief Start getting scanned data
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param aStart Start step
+ * @param aEnd End step
+ * @param aGroup Number of group
+ * @param aCull Culling clearance
+ * @param aNum Number of scan
+ * @param *aData Pointer to buffer structure
+ * @param acEnc Encode type
+ * @return failed: false, succeeded: true
+ * @attention Scip2CMD_StopND must be called before calling another Scip2CMD function,
+ *            if the device remains sending data to PC!!
  */
 /*--------------------------------------------------------------*/
 int
@@ -771,11 +756,10 @@ Scip2CMD_StartND( S2Port * apPort, int aStart, int aEnd, int aGroup,
 
 /*--------------------------------------------------------------*/
 /**
-  @fn
-  @brief Stop ND scanning
-  @param *apPort Pointer to SCIP2.0 Device Port
-  @param *aData Pointer to buffer structure
-  @return failed: false, succeeded: true
+ * @brief Stop ND scanning
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param *aData Pointer to buffer structure
+ * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
 int Scip2CMD_StopND( S2Port * apPort, S2Sdd_t * aData )
