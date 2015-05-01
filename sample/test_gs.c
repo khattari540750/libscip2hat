@@ -1,9 +1,12 @@
-
+/****************************************************************/
 /**
   @file   test_gs.c
-  @brief  Library for Sokuiki-Sensor "URG"
+  @brief  Library for Sokuiki-Sensor "URG" test program
   @author HATTORI Kohei <hattori[at]team-lab.com>
  */
+/****************************************************************/
+
+
 
 #include <stdio.h>
 #include <unistd.h>
@@ -14,40 +17,50 @@
 
 // #define USE_GS
 
-/** Flag */
+
+
+//! Shut off Flag
 int gShutoff;
 
+
+
+/*--------------------------------------------------------------*/
 /**
-  @brief Ctrl+C trap
-  @param aN not used
+ * @brief Ctrl+C trap
+ * @param aN not used
  */
+/*--------------------------------------------------------------*/
 void ctrlc( int aN )
 {
-    /* It is recommended to stop URG outputting data. */
-    /* or cost much time to start communication next time. */
+    //! It is recommended to stop URG outputting data.
+    //! or cost much time to start communication next time.
     gShutoff = 1;
     signal( SIGINT, NULL );
 }
 
+
+
+/*--------------------------------------------------------------*/
 /**
-  @brief Main function
-  @param aArgc Number of Arguments
-  @param appArgv Arguments
-  @return failed: 0, succeeded: 1
+ * @brief Main function
+ * @param aArgc Number of Arguments
+ * @param appArgv Arguments
+ * @return failed: 0, succeeded: 1
  */
+/*--------------------------------------------------------------*/
 int main( int aArgc, char **appArgv )
 {
-    /* Device Port */
+    //! Device Port
     S2Port *port;
-    /* Data recive dual buffer */
+    //! Data recive dual buffer
     S2Sdd_t buf;
-    /* Pointer to data buffer */
+    //! Pointer to data buffer
     S2Scan_t *data;
-    /* Loop valiant */
+    //! Loop valiant
     int j;
-    /* Returned value */
+    //! Returned value
     int ret;
-    /* Local time */
+    //! Local time
     struct timeval tm;
 
     if( aArgc != 2 )
@@ -56,11 +69,11 @@ int main( int aArgc, char **appArgv )
         return 0;
     }
 
-    /* Start trapping ctrl+c signal */
+    //! Start trapping ctrl+c signal
     gShutoff = 0;
     signal( SIGINT, ctrlc );
 
-    /* Open the port */
+    //! Open the port
     port = Scip2_Open( appArgv[1], B115200 );
     if( port == 0 )
     {
@@ -69,13 +82,13 @@ int main( int aArgc, char **appArgv )
     }
     printf( "Port opened\n" );
 
-    /* Initialize buffer before getting scanned data */
+    //! Initialize buffer before getting scanned data */
     S2Sdd_Init( &buf );
     printf( "Buffer initialized\n" );
 
-    /* Demand sending me scanned data */
-    /* Data will be recived in another thread */
-    /* Power laser ON */
+    //! Demand sending me scanned data
+    //! Data will be recived in another thread
+    //! Power laser ON
     ret = Scip2CMD_BM( port );
     if( ret == 0 )
     {
@@ -86,17 +99,17 @@ int main( int aArgc, char **appArgv )
 
     while( !gShutoff )
     {
-        /* Start using scanned data */
+        //! Start using scanned data
         ret = S2Sdd_Begin( &buf, &data );
-        /* Returned value is 0 when buffer is having been used now */
+        //! Returned value is 0 when buffer is having been used now
         if( ret > 0 )
         {
-            /* You can start reciving next data after S2Sdd_Begin succeeded */
+            //! You can start reciving next data after S2Sdd_Begin succeeded
             gettimeofday( &tm, NULL );
             Scip2CMD_GS( port, 44, 725, 1, &buf, SCIP2_ENC_2BYTE );
-            /* then you can analyze data in parallel with reciving next data */
+            //! then you can analyze data in parallel with reciving next data
 
-            /* ---- analyze data ---- */
+            //! ---- analyze data ----
             usleep( 90000 );
 
             for ( j = 0; j < data->size; j++ )
@@ -108,7 +121,7 @@ int main( int aArgc, char **appArgv )
                     ( int )( ( ( tm.tv_sec * 1000 ) & 0x7FFFFFFF ) +
                              tm.tv_usec / 1000 ), ( int )data->time, ( int )data->data[data->size / 2] );
 
-            /* Don't forget S2Sdd_End to unlock buffer */
+            //! Don't forget S2Sdd_End to unlock buffer
             S2Sdd_End( &buf );
         }
         else if( ret == -1 )
@@ -123,7 +136,7 @@ int main( int aArgc, char **appArgv )
     }
     printf( "\nStopping\n" );
 
-    /* Power laser OFF */
+    //! Power laser OFF
     Scip2CMD_StopGS( port, &buf );
     ret = Scip2CMD_QT( port );
     if( ret == 0 )
@@ -134,11 +147,11 @@ int main( int aArgc, char **appArgv )
 
     printf( "Stopped\n" );
 
-    /* Destruct buffer */
+    //! Destruct buffer
     S2Sdd_Dest( &buf );
     printf( "Buffer destructed\n" );
 
-    /* Close port */
+    //! Close port
     Scip2_Close( port );
     printf( "Port closed\n" );
 

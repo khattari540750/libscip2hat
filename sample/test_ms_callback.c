@@ -40,9 +40,9 @@ void ctrlc( int aN )
 
 /*--------------------------------------------------------------*/
 /**
- * @brief  callback
- * @param  aScan
- * @param  aUser
+ * @brief callback
+ * @param aScan
+ * @param aUser
  * @retval 1:success to analyze scan data.
  * @retval 0:failed to analyze scan data
  *             and stop thread of duall buffer.

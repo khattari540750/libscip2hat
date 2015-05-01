@@ -42,9 +42,9 @@ int Scip2CMD_SCIP2( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
- * @brief  Change Device's Bitrate
- * @param  *apPort Pointer to SCIP2.0 Device Port
- * @param  acBitrate Bitrate
+ * @brief Change Device's Bitrate
+ * @param *apPort Pointer to SCIP2.0 Device Port
+ * @param acBitrate Bitrate
  * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/
@@ -107,8 +107,8 @@ int Scip2CMD_BM( S2Port * apPort )
 
 /*--------------------------------------------------------------*/
 /**
- * @brief  Laser OFF
- * @param  *apPort Pointer to SCIP2.0 Device Port
+ * @brief Laser OFF
+ * @param *apPort Pointer to SCIP2.0 Device Port
  * @return failed: false, succeeded: true
  */
 /*--------------------------------------------------------------*/

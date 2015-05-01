@@ -1,7 +1,7 @@
 /****************************************************************/
 /**
-  @file   libscip2hat_test.c
-  @brief  Library for Sokuiki-Sensor "URG"
+  @file   test_ms.c
+  @brief  Library for Sokuiki-Sensor "URG" test program
   @author HATTORI Kohei <hattori[at]team-lab.com>
  */
 /****************************************************************/
@@ -19,7 +19,8 @@
 
 
 
-int gShutoff; //! Flag
+//! Shut off Flag
+int gShutoff;
 
 
 
@@ -118,6 +119,7 @@ int main( int aArgc, char **appArgv )
     }
     printf( "\nStopping\n" );
 
+    //! Stop Data get
     ret = Scip2CMD_StopMS( port, &buf );
     if( ret == 0 ){
         fprintf( stderr, "ERROR: StopMS failed.\n" );
