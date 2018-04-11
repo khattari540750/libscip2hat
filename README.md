@@ -1,10 +1,10 @@
 libscip2hat
 ============
-北陽製レーザー測域センサ " URG " を利用するためのライブラリ
+Library for Hokuyo's laser range sensor " URG " 
 
 
-動作環境
---------
+Operating environment
+---------------------
 -  OSX
 -  Linux
 -  Microsoft Windows
@@ -12,12 +12,12 @@ libscip2hat
          and pthreads_win32 (http://sources.redhat.com/pthreads-win32/)
 
 
-ビルド・インストール方法
-----------------------
- このプロジェクトは、以下の手順にて、cmake を利用してビルド、インストールします。
- あらかじめ cmake をインストールしておいてください。
+Build Install
+-------------
+ Build and install this project using cmake in the following procedure.
+ Please install cmake in advance.
 
-    $ git clone http://gitbucket.team-lab.local/git/hattori/libscip2hat.git
+    $ git clone https://github.com/khattari540750/libscip2hat.git
     $ cd libscip2hat
     $ mkdir build
     $ cd build
@@ -26,17 +26,19 @@ libscip2hat
     $ sudo make install
 
 
-使い方
-------
-サンプルプログラムを使って動作テストを行います。このプログラムでは、URGの正面方向における、物体までの距離が表示されます。
+How to use
+----------
+We test the operation using the sample program.
+In this program, the distance to the object in the front direction of the URG is displayed.
 
-1. まず、URGをPCに接続し、電源を入れます。
-2. 先ほどダウンロードしたパッケージのディレクトリから、サンプルの保存されているディレクトリへ移動します。
+
+1. First, connect the URG to the PC and turn on the power.
+2. Move from the directory of the package downloaded earlier to the directory where the sample is saved.
    `$ cd libscip2hat/sample`
-3. サンプルプログラムを実行します。
+3. Execute the sample program.
    `$./test-ms /dev/cu.usbmodem`
-   終了する際は、
+   When finishing,
    `control + c`
-ボタンを押すことで停止できます。
-このとき、/dev/cu.usbmodem とは、URGが接続されているポート情報ファイルを示しており、環境によってその文字列は変化します。
-URGをポートから抜き差しした際、/dev/内で現れたり消えたりするものが対応したポート情報ファイルなので、それを引数として与えます。
+You can stop by pressing the button.
+At this time, /dev/cu.usbmodem indicates the port information file to which URG is connected, and its character string will change depending on the environment.
+When URG is plugged in or removed from a port, what appears or disappears in /dev/ is the corresponding port information file, so give it as an argument.
